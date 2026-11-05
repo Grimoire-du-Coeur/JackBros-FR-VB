@@ -45,8 +45,18 @@ Merci aux développeurs pour leurs émulateurs qui permettent de faire revivre l
 
 - **Ryphecha** et l'équipe [Mednafen](https://mednafen.github.io/).
 - L'équipe [RetroArch](https://www.retroarch.com/) et le core [Beetle VB](https://docs.libretro.com/library/beetle_vb/).
-- **Floogle** pour l'émulateur 3DS [Red-Viper](https://github.com/Floogle/red-viper).
-- **skyfloogle** pour l'émulateur VR [Virtual Boy Go](https://github.com/skyfloogle/virtualboygo).
+- **skyfloogle** pour l'émulateur 3DS [Red-Viper](https://github.com/skyfloogle/red-viper).
+- **CidVonHighwind** pour l'émulateur VR [VirtualBoyGo](https://github.com/CidVonHighwind/VirtualBoyGo) (Meta Quest, via SideQuest).
+
+<br/>
+
+---
+
+## Outils tiers embarqués
+
+Le patcher web du dossier `patcher/` embarque **xdelta3**, l'outil de patch différentiel créé par **Joshua MacDonald** ([xdelta](https://github.com/jmacd/xdelta)), ici compilé en WebAssembly. Il s'exécute entièrement côté navigateur. Ce composant reste soumis à sa propre licence, distincte de celles de ce dépôt.
+
+L'interface du patcher et de l'outil utilise [Tailwind CSS](https://tailwindcss.com/) (MIT) et les icônes [Lucide](https://lucide.dev/) (ISC), chargés depuis leurs CDN respectifs.
 
 <br/>
 
@@ -56,4 +66,5 @@ Merci aux développeurs pour leurs émulateurs qui permettent de faire revivre l
 
 Ce projet est une initiative amateur bénévole réalisée à des fins de préservation et d'accessibilité.  
 Aucune ROM originale sous copyright n'est fournie dans ce dépôt.  
+Le code est sous [GPL-3.0](./LICENSE), la traduction sous [CC BY-NC-SA 4.0](./LICENSE-TRADUCTION).  
 Jack Bros., Jack Frost, Shin Megami Tensei et leurs logos sont des marques déposées d'**Atlus / Sega**.

@@ -17,21 +17,57 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from core_engine import extract_all_text, encode_and_insert_text
+from core_engine import ErreurEncodage, extract_all_text, encode_and_insert_text
 
 app = FastAPI(title="Jack Bros Translation Tool Backend")
 
 DIST_DIR = Path(__file__).parent / "dist"
+RACINE = Path(__file__).resolve().parent.parent
+PORT = 8000
+
 if (DIST_DIR / "assets").exists():
     app.mount("/assets", StaticFiles(directory=str(DIST_DIR / "assets")), name="assets")
 
+# Ce serveur écrit des fichiers à un chemin fourni par le client. Avec
+# allow_origins=["*"], n'importe quelle page ouverte dans le navigateur
+# pendant que l'outil tourne pouvait lui faire écrire sur le disque. Les
+# requêtes de l'outil portent un corps JSON, donc elles passent par une
+# requête préalable (preflight) : limiter les origines suffit à les bloquer.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[f"http://127.0.0.1:{PORT}", f"http://localhost:{PORT}"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+
+def dossier_de_travail(chemin: str) -> Path:
+    """Valide un dossier de destination : l'outil n'écrit que dans le dépôt.
+
+    Deuxième barrière après le filtrage d'origines, pour qu'un chemin comme
+    « C:\\Windows\\System32 » ou « ../.. » ne puisse pas servir de cible.
+    """
+    if not chemin:
+        raise HTTPException(status_code=400, detail="Dossier de travail manquant.")
+    resolu = Path(chemin).resolve()
+    if resolu != RACINE and RACINE not in resolu.parents:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Écriture refusée hors du dépôt. Attendu : {RACINE}",
+        )
+    return resolu
+
+
+def rom_existante(chemin: str) -> Path:
+    """La ROM est lue, pas écrite : elle peut être n'importe où sur le disque,
+    mais doit exister et être un fichier."""
+    if not chemin:
+        raise HTTPException(status_code=400, detail="Chemin de la ROM manquant.")
+    rom = Path(chemin).resolve()
+    if not rom.is_file():
+        raise HTTPException(status_code=400, detail=f"ROM introuvable : {rom}")
+    return rom
 
 progress_state = {"current": 0, "task": "", "logs": []}
 progress_lock = threading.Lock()
@@ -88,23 +124,26 @@ def api_default_paths():
 def api_extract_text(req: RomRequest):
     reset_progress("extract-text")
     logger = get_logger(req.work_dir)
-    rom = Path(req.rom_path)
-    if not rom.exists():
-        raise HTTPException(status_code=400, detail="Fichier ROM introuvable")
+    rom = rom_existante(req.rom_path)
+    w = dossier_de_travail(req.work_dir)
 
-    w = Path(req.work_dir)
     trad_dir = w / "traduction"
     trad_dir.mkdir(parents=True, exist_ok=True)
-    out_json = trad_dir / "JackBros_FR.json"
+    # On écrit à côté de la traduction, jamais par-dessus : une extraction
+    # faite depuis une ROM déjà patchée écraserait sinon le travail en cours.
+    out_json = trad_dir / "JackBros_EXTRAIT.json"
 
     update_progress(0.2)
-    count = extract_all_text(str(rom), str(out_json), logger)
+    try:
+        count = extract_all_text(str(rom), str(out_json), logger)
+    except (ErreurEncodage, FileNotFoundError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
     update_progress(1.0)
     return {"status": "ok", "msg": f"{count} dialogues extraits dans {out_json.name}", "count": count}
 
 @app.get("/api/get-translations")
 def api_get_translations(work_dir: str):
-    w = Path(work_dir)
+    w = dossier_de_travail(work_dir)
     target = w / "traduction" / "JackBros_FR.json"
     if not target.exists():
         raise HTTPException(status_code=404, detail="Fichier traduction/JackBros_FR.json introuvable.")
@@ -118,7 +157,7 @@ def api_save_translations(payload: dict):
     data = payload.get("data")
     if not work_dir or data is None:
         raise HTTPException(status_code=400, detail="Paramètres manquants")
-    w = Path(work_dir)
+    w = dossier_de_travail(work_dir)
     target = w / "traduction" / "JackBros_FR.json"
     with open(target, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
@@ -128,10 +167,8 @@ def api_save_translations(payload: dict):
 def api_rebuild_rom(req: RomRequest):
     reset_progress("rebuild-rom")
     logger = get_logger(req.work_dir)
-    rom_orig = Path(req.rom_path)
-    w = Path(req.work_dir)
-    if not rom_orig.exists():
-        raise HTTPException(status_code=400, detail="ROM originale introuvable.")
+    rom_orig = rom_existante(req.rom_path)
+    w = dossier_de_travail(req.work_dir)
 
     with open(rom_orig, 'rb') as f:
         rom_bytes = f.read()
@@ -141,7 +178,13 @@ def api_rebuild_rom(req: RomRequest):
     if not json_path.exists():
         raise HTTPException(status_code=404, detail="Fichier traduction/JackBros_FR.json introuvable.")
 
-    rom_bytes = encode_and_insert_text(rom_bytes, str(json_path), logger)
+    try:
+        rom_bytes = encode_and_insert_text(rom_bytes, str(json_path), logger)
+    except ErreurEncodage as exc:
+        # Mieux vaut refuser de compiler qu'écrire une ROM aux dialogues
+        # tronqués : le joueur ne verrait l'erreur qu'en jeu.
+        logger(str(exc), "error")
+        raise HTTPException(status_code=400, detail=str(exc))
 
     update_progress(0.8)
     out_rom = w / "Jack Bros (Fr).vb"
@@ -161,5 +204,5 @@ app.mount("/", StaticFiles(directory=str(DIST_DIR)), name="static")
 if __name__ == "__main__":
     import uvicorn
     import webbrowser
-    threading.Timer(1.2, lambda: webbrowser.open("http://127.0.0.1:8000")).start()
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
+    threading.Timer(1.2, lambda: webbrowser.open(f"http://127.0.0.1:{PORT}")).start()
+    uvicorn.run(app, host="127.0.0.1", port=PORT, log_level="info")

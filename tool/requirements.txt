@@ -1,3 +1,5 @@
-fastapi
-uvicorn
-pydantic
+# Bornes hautes volontaires : une version majeure de FastAPI ou de Pydantic
+# casserait l'outil sans prevenir, des mois apres le dernier commit.
+fastapi>=0.110,<1.0
+uvicorn>=0.27,<1.0
+pydantic>=2.6,<3.0

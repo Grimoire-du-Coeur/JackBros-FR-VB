@@ -18,4 +18,6 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
-server/
+
+# Sorties generees par l'outil
+traduction/JackBros_EXTRAIT.json

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470" role="img"
+     aria-label="Jack Bros. (Virtual Boy) - Traduction francaise integrale, version 1.0">
+  <title>Jack Bros. (Virtual Boy) - Traduction francaise integrale</title>
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000" opacity="0.42"/>
+    </pattern>
+    <radialGradient id="vig" cx="50%" cy="44%" r="74%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="58%" stop-color="#000" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.96"/>
+    </radialGradient>
+    <linearGradient id="roll" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D40000" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#D40000" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#D40000" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="typeclip">
+      <rect id="tc" x="371.8" y="248" width="0" height="34"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .mono { font-family: ui-monospace, "SFMono-Regular", "Consolas", "Liberation Mono", monospace; }
+    .p { fill: #D40000; opacity: 0; transform-box: fill-box; transform-origin: center;
+          animation: pop .42s cubic-bezier(.2,.9,.3,1.4) both; }
+    @keyframes pop {
+      0%   { opacity: 0; transform: scale(.2); fill: #FF3B2F; }
+      55%  { opacity: 1; transform: scale(1.35); fill: #FF3B2F; }
+      100% { opacity: 1; transform: scale(1); fill: #D40000; }
+    }
+    #tc { animation: type 2.4s steps(32) 1.35s both; }
+    @keyframes type { from { width: 0 } to { width: 456.3px } }
+    .caret { fill: #FF3B2F;
+              animation: caretmove 2.4s steps(32) 1.35s both,
+                         blink 1s steps(1) infinite; }
+    @keyframes caretmove { from { x: 374.8px } to { x: 831.2px } }
+    @keyframes blink { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+    .maze { animation: drift 72s linear infinite; }
+    @keyframes drift { from { transform: translateX(0) } to { transform: translateX(-1200px) } }
+    .band { animation: rolldown 7s linear infinite; }
+    @keyframes rolldown { from { transform: translateY(-160px) } to { transform: translateY(530px) } }
+    .crt { animation: flick 5.5s steps(1) infinite; }
+    @keyframes flick {
+      0%,96% { opacity: 1 } 96.5% { opacity: .82 } 97% { opacity: 1 }
+      98% { opacity: .9 } 98.5% { opacity: 1 }
+    }
+    .hud { fill: #9E0000; font-size: 19px; opacity: 0; animation: fade .8s .15s both; }
+    @keyframes fade { from { opacity: 0 } to { opacity: .92 } }
+    .tick { fill: #D40000; font-size: 19px; opacity: 0; animation: show 10s steps(1) infinite; }
+    @keyframes show { 0%,9.99% { opacity: .92 } 10%,100% { opacity: 0 } }
+    .sub { fill: #D40000; font-size: 23px; }
+    .meta { fill: #C01818; font-size: 15px; letter-spacing: 5.5px; opacity: 0;
+             animation: fade 1s 4.1s both; }
+    .jg { fill: #9E0000; opacity: 0; transform-box: fill-box; transform-origin: center;
+           animation: jin .6s both, bob 3.6s ease-in-out infinite 3.9s; }
+    @keyframes jin { from { opacity: 0; transform: translateY(10px) }
+                      to { opacity: .9; transform: translateY(0) } }
+    @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+    .jl { fill: #A81414; font-size: 12px; letter-spacing: 3px; opacity: 0;
+           animation: fadedim .7s both; }
+    @keyframes fadedim { from { opacity: 0 } to { opacity: 1 } }
+    .rule { stroke: #5E0000; stroke-width: 1; opacity: 0; animation: fade 1s .3s both; }
+    @media (prefers-reduced-motion: reduce) {
+      .p,.maze,.band,.crt,.caret,#tc,.jg,.tick,.hud,.meta,.jl,.rule { animation: none !important; }
+      .p,.jg,.hud,.meta,.jl,.rule { opacity: 1 }
+      #tc { width: 456.3px }
+      .tick,.caret { opacity: 0 }
+    }
+  </style>
+
+  <rect width="1200" height="470" fill="#000000"/>
+
+  <g class="crt">
+    <!-- labyrinthe defilant : DFS graine 1995, deux copies pour une boucle propre -->
+    <g class="maze" opacity="0.26">
+      <path d="M0 0v30M30 0v30M270 0v30M390 0v30M420 0v30M630 0v30M750 0v30M840 0v30M930 0v30M1140 0v30M1200 0v30M0 30v30M60 30v30M180 30v30M240 30v30M270 30v30M300 30v30M330 30v30M420 30v30M450 30v30M510 30v30M540 30v30M600 30v30M660 30v30M720 30v30M780 30v30M810 30v30M840 30v30M930 30v30M1050 30v30M1080 30v30M1140 30v30M1200 30v30M0 60v30M30 60v30M60 60v30M120 60v30M210 60v30M240 60v30M270 60v30M300 60v30M330 60v30M390 60v30M420 60v30M510 60v30M540 60v30M600 60v30M630 60v30M660 60v30M690 60v30M780 60v30M810 60v30M840 60v30M930 60v30M990 60v30M1080 60v30M1170 60v30M1200 60v30M0 90v30M30 90v30M60 90v30M120 90v30M210 90v30M270 90v30M300 90v30M360 90v30M450 90v30M510 90v30M630 90v30M660 90v30M720 90v30M780 90v30M810 90v30M840 90v30M900 90v30M990 90v30M1050 90v30M1110 90v30M1200 90v30M0 120v30M60 120v30M120 120v30M180 120v30M240 120v30M300 120v30M390 120v30M420 120v30M450 120v30M480 120v30M540 120v30M660 120v30M720 120v30M780 120v30M870 120v30M900 120v30M990 120v30M1020 120v30M1050 120v30M1080 120v30M1140 120v30M1200 120v30M0 150v30M30 150v30M90 150v30M120 150v30M150 150v30M180 150v30M210 150v30M270 150v30M330 150v30M360 150v30M420 150v30M450 150v30M510 150v30M600 150v30M630 150v30M690 150v30M720 150v30M780 150v30M870 150v30M930 150v30M960 150v30M1050 150v30M1080 150v30M1110 150v30M1200 150v30M0 180v30M30 180v30M90 180v30M120 180v30M150 180v30M240 180v30M300 180v30M330 180v30M360 180v30M420 180v30M570 180v30M630 180v30M690 180v30M720 180v30M840 180v30M870 180v30M1050 180v30M1110 180v30M1170 180v30M1200 180v30M0 210v30M30 210v30M60 210v30M90 210v30M120 210v30M210 210v30M270 210v30M360 210v30M420 210v30M540 210v30M600 210v30M720 210v30M870 210v30M930 210v30M1050 210v30M1140 210v30M1170 210v30M1200 210v30M0 240v30M30 240v30M60 240v30M90 240v30M120 240v30M150 240v30M180 240v30M210 240v30M300 240v30M390 240v30M510 240v30M630 240v30M690 240v30M750 240v30M900 240v30M930 240v30M1050 240v30M1140 240v30M1170 240v30M1200 240v30M0 270v30M90 270v30M120 270v30M150 270v30M240 270v30M330 270v30M360 270v30M420 270v30M450 270v30M510 270v30M600 270v30M660 270v30M690 270v30M780 270v30M840 270v30M870 270v30M900 270v30M930 270v30M960 270v30M1050 270v30M1080 270v30M1170 270v30M1200 270v30M0 300v30M30 300v30M90 300v30M150 300v30M210 300v30M300 300v30M360 300v30M450 300v30M480 300v30M540 300v30M570 300v30M630 300v30M660 300v30M780 300v30M840 300v30M870 300v30M900 300v30M960 300v30M1020 300v30M1050 300v30M1110 300v30M1170 300v30M1200 300v30M0 330v30M60 330v30M120 330v30M150 330v30M210 330v30M240 330v30M270 330v30M300 330v30M330 330v30M390 330v30M450 330v30M480 330v30M510 330v30M540 330v30M570 330v30M600 330v30M660 330v30M870 330v30M960 330v30M1020 330v30M1110 330v30M1170 330v30M1200 330v30M0 360v30M30 360v30M60 360v30M120 360v30M150 360v30M210 360v30M240 360v30M300 360v30M450 360v30M480 360v30M510 360v30M600 360v30M630 360v30M660 360v30M720 360v30M750 360v30M810 360v30M870 360v30M930 360v30M960 360v30M990 360v30M1050 360v30M1110 360v30M1140 360v30M1200 360v30M0 390v30M30 390v30M90 390v30M120 390v30M240 390v30M270 390v30M330 390v30M480 390v30M630 390v30M690 390v30M720 390v30M750 390v30M810 390v30M840 390v30M870 390v30M900 390v30M930 390v30M990 390v30M1050 390v30M1080 390v30M1110 390v30M1140 390v30M1200 390v30M0 420v30M60 420v30M90 420v30M240 420v30M300 420v30M330 420v30M390 420v30M480 420v30M510 420v30M570 420v30M630 420v30M720 420v30M750 420v30M810 420v30M870 420v30M900 420v30M1020 420v30M1050 420v30M1080 420v30M1110 420v30M1200 420v30M0 450v30M120 450v30M390 450v30M420 450v30M510 450v30M600 450v30M780 450v30M990 450v30M1080 450v30M1200 450v30M0 0h30M30 0h30M60 0h30M90 0h30M120 0h30M150 0h30M180 0h30M210 0h30M240 0h30M270 0h30M300 0h30M330 0h30M360 0h30M390 0h30M420 0h30M450 0h30M480 0h30M510 0h30M540 0h30M570 0h30M600 0h30M630 0h30M660 0h30M690 0h30M720 0h30M750 0h30M780 0h30M810 0h30M840 0h30M870 0h30M900 0h30M930 0h30M960 0h30M990 0h30M1020 0h30M1050 0h30M1080 0h30M1110 0h30M1140 0h30M1170 0h30M30 30h30M90 30h30M120 30h30M150 30h30M180 30h30M330 30h30M450 30h30M480 30h30M540 30h30M600 30h30M660 30h30M780 30h30M840 30h30M870 30h30M960 30h30M990 30h30M1020 30h30M1080 30h30M1140 30h30M0 60h30M60 60h30M120 60h30M150 60h30M210 60h30M330 60h30M360 60h30M450 60h30M570 60h30M630 60h30M690 60h30M720 60h30M750 60h30M870 60h30M900 60h30M930 60h30M990 60h30M1020 60h30M1110 60h30M90 90h30M150 90h30M180 90h30M390 90h30M420 90h30M450 90h30M540 90h30M570 90h30M720 90h30M840 90h30M870 90h30M960 90h30M1020 90h30M1050 90h30M1080 90h30M1110 90h30M1140 90h30M60 120h30M90 120h30M150 120h30M210 120h30M240 120h30M300 120h30M330 120h30M360 120h30M390 120h30M480 120h30M510 120h30M540 120h30M570 120h30M600 120h30M660 120h30M690 120h30M750 120h30M900 120h30M930 120h30M960 120h30M1080 120h30M1140 120h30M1170 120h30M30 150h30M120 150h30M180 150h30M270 150h30M540 150h30M600 150h30M660 150h30M720 150h30M780 150h30M810 150h30M840 150h30M930 150h30M990 150h30M1110 150h30M1140 150h30M60 180h30M210 180h30M240 180h30M270 180h30M360 180h30M450 180h30M480 180h30M510 180h30M540 180h30M570 180h30M630 180h30M750 180h30M810 180h30M870 180h30M900 180h30M960 180h30M990 180h30M1020 180h30M1140 180h30M150 210h30M180 210h30M300 210h30M390 210h30M450 210h30M480 210h30M510 210h30M600 210h30M660 210h30M720 210h30M750 210h30M780 210h30M810 210h30M900 210h30M930 210h30M960 210h30M990 210h30M1080 210h30M1110 210h30M210 240h30M240 240h30M270 240h30M300 240h30M330 240h30M360 240h30M420 240h30M450 240h30M480 240h30M540 240h30M570 240h30M630 240h30M660 240h30M690 240h30M750 240h30M780 240h30M810 240h30M840 240h30M870 240h30M930 240h30M960 240h30M990 240h30M1020 240h30M1050 240h30M1080 240h30M30 270h30M180 270h30M270 270h30M390 270h30M450 270h30M480 270h30M540 270h30M570 270h30M600 270h30M720 270h30M750 270h30M810 270h30M960 270h30M990 270h30M1080 270h30M1110 270h30M0 300h30M30 300h30M60 300h30M120 300h30M180 300h30M210 300h30M240 300h30M270 300h30M300 300h30M360 300h30M390 300h30M510 300h30M570 300h30M630 300h30M690 300h30M720 300h30M780 300h30M990 300h30M1110 300h30M1140 300h30M90 330h30M150 330h30M240 330h30M330 330h30M390 330h30M420 330h30M480 330h30M600 330h30M660 330h30M690 330h30M720 330h30M750 330h30M780 330h30M810 330h30M900 330h30M930 330h30M960 330h30M1050 330h30M1080 330h30M1140 330h30M30 360h30M90 360h30M180 360h30M360 360h30M390 360h30M540 360h30M690 360h30M720 360h30M780 360h30M810 360h30M870 360h30M900 360h30M990 360h30M1050 360h30M1080 360h30M60 390h30M150 390h30M180 390h30M270 390h30M300 390h30M330 390h30M360 390h30M390 390h30M420 390h30M510 390h30M540 390h30M570 390h30M660 390h30M750 390h30M840 390h30M1020 390h30M1140 390h30M1170 390h30M30 420h30M120 420h30M150 420h30M180 420h30M210 420h30M360 420h30M390 420h30M420 420h30M450 420h30M510 420h30M570 420h30M600 420h30M630 420h30M660 420h30M780 420h30M930 420h30M960 420h30M990 420h30M1140 420h30M0 450h30M90 450h30M150 450h30M180 450h30M210 450h30M240 450h30M270 450h30M330 450h30M450 450h30M540 450h30M660 450h30M690 450h30M750 450h30M810 450h30M840 450h30M900 450h30M930 450h30M960 450h30M1020 450h30M1110 450h30M1140 450h30M0 480h30M30 480h30M60 480h30M90 480h30M120 480h30M150 480h30M180 480h30M210 480h30M240 480h30M270 480h30M300 480h30M330 480h30M360 480h30M390 480h30M420 480h30M450 480h30M480 480h30M510 480h30M540 480h30M570 480h30M600 480h30M630 480h30M660 480h30M690 480h30M720 480h30M750 480h30M780 480h30M810 480h30M840 480h30M870 480h30M900 480h30M930 480h30M960 480h30M990 480h30M1020 480h30M1050 480h30M1080 480h30M1110 480h30M1140 480h30M1170 480h30" fill="none" stroke="#5E0000" stroke-width="2"/>
+      <g transform="translate(1200,0)">
+        <path d="M0 0v30M30 0v30M270 0v30M390 0v30M420 0v30M630 0v30M750 0v30M840 0v30M930 0v30M1140 0v30M1200 0v30M0 30v30M60 30v30M180 30v30M240 30v30M270 30v30M300 30v30M330 30v30M420 30v30M450 30v30M510 30v30M540 30v30M600 30v30M660 30v30M720 30v30M780 30v30M810 30v30M840 30v30M930 30v30M1050 30v30M1080 30v30M1140 30v30M1200 30v30M0 60v30M30 60v30M60 60v30M120 60v30M210 60v30M240 60v30M270 60v30M300 60v30M330 60v30M390 60v30M420 60v30M510 60v30M540 60v30M600 60v30M630 60v30M660 60v30M690 60v30M780 60v30M810 60v30M840 60v30M930 60v30M990 60v30M1080 60v30M1170 60v30M1200 60v30M0 90v30M30 90v30M60 90v30M120 90v30M210 90v30M270 90v30M300 90v30M360 90v30M450 90v30M510 90v30M630 90v30M660 90v30M720 90v30M780 90v30M810 90v30M840 90v30M900 90v30M990 90v30M1050 90v30M1110 90v30M1200 90v30M0 120v30M60 120v30M120 120v30M180 120v30M240 120v30M300 120v30M390 120v30M420 120v30M450 120v30M480 120v30M540 120v30M660 120v30M720 120v30M780 120v30M870 120v30M900 120v30M990 120v30M1020 120v30M1050 120v30M1080 120v30M1140 120v30M1200 120v30M0 150v30M30 150v30M90 150v30M120 150v30M150 150v30M180 150v30M210 150v30M270 150v30M330 150v30M360 150v30M420 150v30M450 150v30M510 150v30M600 150v30M630 150v30M690 150v30M720 150v30M780 150v30M870 150v30M930 150v30M960 150v30M1050 150v30M1080 150v30M1110 150v30M1200 150v30M0 180v30M30 180v30M90 180v30M120 180v30M150 180v30M240 180v30M300 180v30M330 180v30M360 180v30M420 180v30M570 180v30M630 180v30M690 180v30M720 180v30M840 180v30M870 180v30M1050 180v30M1110 180v30M1170 180v30M1200 180v30M0 210v30M30 210v30M60 210v30M90 210v30M120 210v30M210 210v30M270 210v30M360 210v30M420 210v30M540 210v30M600 210v30M720 210v30M870 210v30M930 210v30M1050 210v30M1140 210v30M1170 210v30M1200 210v30M0 240v30M30 240v30M60 240v30M90 240v30M120 240v30M150 240v30M180 240v30M210 240v30M300 240v30M390 240v30M510 240v30M630 240v30M690 240v30M750 240v30M900 240v30M930 240v30M1050 240v30M1140 240v30M1170 240v30M1200 240v30M0 270v30M90 270v30M120 270v30M150 270v30M240 270v30M330 270v30M360 270v30M420 270v30M450 270v30M510 270v30M600 270v30M660 270v30M690 270v30M780 270v30M840 270v30M870 270v30M900 270v30M930 270v30M960 270v30M1050 270v30M1080 270v30M1170 270v30M1200 270v30M0 300v30M30 300v30M90 300v30M150 300v30M210 300v30M300 300v30M360 300v30M450 300v30M480 300v30M540 300v30M570 300v30M630 300v30M660 300v30M780 300v30M840 300v30M870 300v30M900 300v30M960 300v30M1020 300v30M1050 300v30M1110 300v30M1170 300v30M1200 300v30M0 330v30M60 330v30M120 330v30M150 330v30M210 330v30M240 330v30M270 330v30M300 330v30M330 330v30M390 330v30M450 330v30M480 330v30M510 330v30M540 330v30M570 330v30M600 330v30M660 330v30M870 330v30M960 330v30M1020 330v30M1110 330v30M1170 330v30M1200 330v30M0 360v30M30 360v30M60 360v30M120 360v30M150 360v30M210 360v30M240 360v30M300 360v30M450 360v30M480 360v30M510 360v30M600 360v30M630 360v30M660 360v30M720 360v30M750 360v30M810 360v30M870 360v30M930 360v30M960 360v30M990 360v30M1050 360v30M1110 360v30M1140 360v30M1200 360v30M0 390v30M30 390v30M90 390v30M120 390v30M240 390v30M270 390v30M330 390v30M480 390v30M630 390v30M690 390v30M720 390v30M750 390v30M810 390v30M840 390v30M870 390v30M900 390v30M930 390v30M990 390v30M1050 390v30M1080 390v30M1110 390v30M1140 390v30M1200 390v30M0 420v30M60 420v30M90 420v30M240 420v30M300 420v30M330 420v30M390 420v30M480 420v30M510 420v30M570 420v30M630 420v30M720 420v30M750 420v30M810 420v30M870 420v30M900 420v30M1020 420v30M1050 420v30M1080 420v30M1110 420v30M1200 420v30M0 450v30M120 450v30M390 450v30M420 450v30M510 450v30M600 450v30M780 450v30M990 450v30M1080 450v30M1200 450v30M0 0h30M30 0h30M60 0h30M90 0h30M120 0h30M150 0h30M180 0h30M210 0h30M240 0h30M270 0h30M300 0h30M330 0h30M360 0h30M390 0h30M420 0h30M450 0h30M480 0h30M510 0h30M540 0h30M570 0h30M600 0h30M630 0h30M660 0h30M690 0h30M720 0h30M750 0h30M780 0h30M810 0h30M840 0h30M870 0h30M900 0h30M930 0h30M960 0h30M990 0h30M1020 0h30M1050 0h30M1080 0h30M1110 0h30M1140 0h30M1170 0h30M30 30h30M90 30h30M120 30h30M150 30h30M180 30h30M330 30h30M450 30h30M480 30h30M540 30h30M600 30h30M660 30h30M780 30h30M840 30h30M870 30h30M960 30h30M990 30h30M1020 30h30M1080 30h30M1140 30h30M0 60h30M60 60h30M120 60h30M150 60h30M210 60h30M330 60h30M360 60h30M450 60h30M570 60h30M630 60h30M690 60h30M720 60h30M750 60h30M870 60h30M900 60h30M930 60h30M990 60h30M1020 60h30M1110 60h30M90 90h30M150 90h30M180 90h30M390 90h30M420 90h30M450 90h30M540 90h30M570 90h30M720 90h30M840 90h30M870 90h30M960 90h30M1020 90h30M1050 90h30M1080 90h30M1110 90h30M1140 90h30M60 120h30M90 120h30M150 120h30M210 120h30M240 120h30M300 120h30M330 120h30M360 120h30M390 120h30M480 120h30M510 120h30M540 120h30M570 120h30M600 120h30M660 120h30M690 120h30M750 120h30M900 120h30M930 120h30M960 120h30M1080 120h30M1140 120h30M1170 120h30M30 150h30M120 150h30M180 150h30M270 150h30M540 150h30M600 150h30M660 150h30M720 150h30M780 150h30M810 150h30M840 150h30M930 150h30M990 150h30M1110 150h30M1140 150h30M60 180h30M210 180h30M240 180h30M270 180h30M360 180h30M450 180h30M480 180h30M510 180h30M540 180h30M570 180h30M630 180h30M750 180h30M810 180h30M870 180h30M900 180h30M960 180h30M990 180h30M1020 180h30M1140 180h30M150 210h30M180 210h30M300 210h30M390 210h30M450 210h30M480 210h30M510 210h30M600 210h30M660 210h30M720 210h30M750 210h30M780 210h30M810 210h30M900 210h30M930 210h30M960 210h30M990 210h30M1080 210h30M1110 210h30M210 240h30M240 240h30M270 240h30M300 240h30M330 240h30M360 240h30M420 240h30M450 240h30M480 240h30M540 240h30M570 240h30M630 240h30M660 240h30M690 240h30M750 240h30M780 240h30M810 240h30M840 240h30M870 240h30M930 240h30M960 240h30M990 240h30M1020 240h30M1050 240h30M1080 240h30M30 270h30M180 270h30M270 270h30M390 270h30M450 270h30M480 270h30M540 270h30M570 270h30M600 270h30M720 270h30M750 270h30M810 270h30M960 270h30M990 270h30M1080 270h30M1110 270h30M0 300h30M30 300h30M60 300h30M120 300h30M180 300h30M210 300h30M240 300h30M270 300h30M300 300h30M360 300h30M390 300h30M510 300h30M570 300h30M630 300h30M690 300h30M720 300h30M780 300h30M990 300h30M1110 300h30M1140 300h30M90 330h30M150 330h30M240 330h30M330 330h30M390 330h30M420 330h30M480 330h30M600 330h30M660 330h30M690 330h30M720 330h30M750 330h30M780 330h30M810 330h30M900 330h30M930 330h30M960 330h30M1050 330h30M1080 330h30M1140 330h30M30 360h30M90 360h30M180 360h30M360 360h30M390 360h30M540 360h30M690 360h30M720 360h30M780 360h30M810 360h30M870 360h30M900 360h30M990 360h30M1050 360h30M1080 360h30M60 390h30M150 390h30M180 390h30M270 390h30M300 390h30M330 390h30M360 390h30M390 390h30M420 390h30M510 390h30M540 390h30M570 390h30M660 390h30M750 390h30M840 390h30M1020 390h30M1140 390h30M1170 390h30M30 420h30M120 420h30M150 420h30M180 420h30M210 420h30M360 420h30M390 420h30M420 420h30M450 420h30M510 420h30M570 420h30M600 420h30M630 420h30M660 420h30M780 420h30M930 420h30M960 420h30M990 420h30M1140 420h30M0 450h30M90 450h30M150 450h30M180 450h30M210 450h30M240 450h30M270 450h30M330 450h30M450 450h30M540 450h30M660 450h30M690 450h30M750 450h30M810 450h30M840 450h30M900 450h30M930 450h30M960 450h30M1020 450h30M1110 450h30M1140 450h30M0 480h30M30 480h30M60 480h30M90 480h30M120 480h30M150 480h30M180 480h30M210 480h30M240 480h30M270 480h30M300 480h30M330 480h30M360 480h30M390 480h30M420 480h30M450 480h30M480 480h30M510 480h30M540 480h30M570 480h30M600 480h30M630 480h30M660 480h30M690 480h30M720 480h30M750 480h30M780 480h30M810 480h30M840 480h30M870 480h30M900 480h30M930 480h30M960 480h30M990 480h30M1020 480h30M1050 480h30M1080 480h30M1110 480h30M1140 480h30M1170 480h30" fill="none" stroke="#5E0000" stroke-width="2"/>
+      </g>
+    </g>
+
+    <rect width="1200" height="470" fill="url(#vig)"/>
+
+    <!-- HUD du jeu : etage + compte a rebours jusqu'a minuit -->
+    <g class="mono">
+      <text class="hud" x="42" y="52" textLength="109.4" lengthAdjust="spacing">FLOOR 06</text>
+      <text class="hud" x="980.2" y="52" textLength="164.2" lengthAdjust="spacing">TIME 23:59:5</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:0.0s">9</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:1.0s">8</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:2.0s">7</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:3.0s">6</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:4.0s">5</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:5.0s">4</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:6.0s">3</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:7.0s">2</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:8.0s">1</text>
+      <text class="tick" x="1149.3" y="52" style="animation-delay:9.0s">0</text>
+    </g>
+    <line class="rule" x1="42" y1="68" x2="1158" y2="68"/>
+
+    <!-- titre : police en tuiles 5x7, comme celle de la cartouche -->
+    <g filter="url(#glow)">
+      <rect class="p" x="176.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.51s"/>
+      <rect class="p" x="192.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.51s"/>
+      <rect class="p" x="208.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.56s"/>
+      <rect class="p" x="192.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.51s"/>
+      <rect class="p" x="192.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.54s"/>
+      <rect class="p" x="192.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.53s"/>
+      <rect class="p" x="192.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.51s"/>
+      <rect class="p" x="144.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.48s"/>
+      <rect class="p" x="192.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.51s"/>
+      <rect class="p" x="160.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.49s"/>
+      <rect class="p" x="176.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.49s"/>
+      <rect class="p" x="256.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.58s"/>
+      <rect class="p" x="272.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.62s"/>
+      <rect class="p" x="288.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.66s"/>
+      <rect class="p" x="240.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.57s"/>
+      <rect class="p" x="304.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.64s"/>
+      <rect class="p" x="240.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.60s"/>
+      <rect class="p" x="304.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.69s"/>
+      <rect class="p" x="240.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.59s"/>
+      <rect class="p" x="256.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.60s"/>
+      <rect class="p" x="272.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.65s"/>
+      <rect class="p" x="288.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.61s"/>
+      <rect class="p" x="304.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.68s"/>
+      <rect class="p" x="240.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.58s"/>
+      <rect class="p" x="304.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.64s"/>
+      <rect class="p" x="240.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.57s"/>
+      <rect class="p" x="304.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.65s"/>
+      <rect class="p" x="240.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.61s"/>
+      <rect class="p" x="304.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.64s"/>
+      <rect class="p" x="352.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.72s"/>
+      <rect class="p" x="368.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.74s"/>
+      <rect class="p" x="384.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.74s"/>
+      <rect class="p" x="336.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.70s"/>
+      <rect class="p" x="400.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.74s"/>
+      <rect class="p" x="336.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.67s"/>
+      <rect class="p" x="336.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.68s"/>
+      <rect class="p" x="336.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.71s"/>
+      <rect class="p" x="336.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.69s"/>
+      <rect class="p" x="400.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.76s"/>
+      <rect class="p" x="352.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.72s"/>
+      <rect class="p" x="368.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.73s"/>
+      <rect class="p" x="384.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.74s"/>
+      <rect class="p" x="432.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.82s"/>
+      <rect class="p" x="496.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.89s"/>
+      <rect class="p" x="432.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.79s"/>
+      <rect class="p" x="480.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.86s"/>
+      <rect class="p" x="432.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.81s"/>
+      <rect class="p" x="464.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.86s"/>
+      <rect class="p" x="432.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.82s"/>
+      <rect class="p" x="448.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.81s"/>
+      <rect class="p" x="432.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.83s"/>
+      <rect class="p" x="464.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.82s"/>
+      <rect class="p" x="432.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.80s"/>
+      <rect class="p" x="480.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.87s"/>
+      <rect class="p" x="432.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.78s"/>
+      <rect class="p" x="496.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.88s"/>
+      <rect class="p" x="608.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.97s"/>
+      <rect class="p" x="624.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.03s"/>
+      <rect class="p" x="640.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.05s"/>
+      <rect class="p" x="656.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.06s"/>
+      <rect class="p" x="608.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.02s"/>
+      <rect class="p" x="672.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.06s"/>
+      <rect class="p" x="608.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.01s"/>
+      <rect class="p" x="672.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.08s"/>
+      <rect class="p" x="608.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.01s"/>
+      <rect class="p" x="624.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.02s"/>
+      <rect class="p" x="640.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.06s"/>
+      <rect class="p" x="656.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.08s"/>
+      <rect class="p" x="608.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.00s"/>
+      <rect class="p" x="672.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.08s"/>
+      <rect class="p" x="608.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:0.98s"/>
+      <rect class="p" x="672.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.09s"/>
+      <rect class="p" x="608.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.01s"/>
+      <rect class="p" x="624.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.05s"/>
+      <rect class="p" x="640.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.06s"/>
+      <rect class="p" x="656.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.04s"/>
+      <rect class="p" x="704.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.10s"/>
+      <rect class="p" x="720.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.14s"/>
+      <rect class="p" x="736.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.12s"/>
+      <rect class="p" x="752.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.16s"/>
+      <rect class="p" x="704.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.09s"/>
+      <rect class="p" x="768.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.16s"/>
+      <rect class="p" x="704.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.08s"/>
+      <rect class="p" x="768.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.20s"/>
+      <rect class="p" x="704.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.09s"/>
+      <rect class="p" x="720.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.11s"/>
+      <rect class="p" x="736.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.14s"/>
+      <rect class="p" x="752.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.19s"/>
+      <rect class="p" x="704.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.08s"/>
+      <rect class="p" x="736.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.14s"/>
+      <rect class="p" x="704.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.11s"/>
+      <rect class="p" x="752.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.19s"/>
+      <rect class="p" x="704.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.13s"/>
+      <rect class="p" x="768.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.20s"/>
+      <rect class="p" x="816.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.22s"/>
+      <rect class="p" x="832.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.25s"/>
+      <rect class="p" x="848.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.26s"/>
+      <rect class="p" x="800.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.24s"/>
+      <rect class="p" x="864.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.32s"/>
+      <rect class="p" x="800.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.20s"/>
+      <rect class="p" x="864.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.27s"/>
+      <rect class="p" x="800.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.20s"/>
+      <rect class="p" x="864.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.27s"/>
+      <rect class="p" x="800.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.22s"/>
+      <rect class="p" x="864.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.30s"/>
+      <rect class="p" x="800.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.20s"/>
+      <rect class="p" x="864.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.26s"/>
+      <rect class="p" x="816.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.23s"/>
+      <rect class="p" x="832.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.25s"/>
+      <rect class="p" x="848.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.28s"/>
+      <rect class="p" x="912.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.37s"/>
+      <rect class="p" x="928.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.37s"/>
+      <rect class="p" x="944.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.38s"/>
+      <rect class="p" x="960.0" y="112.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.41s"/>
+      <rect class="p" x="896.0" y="128.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.34s"/>
+      <rect class="p" x="896.0" y="144.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.30s"/>
+      <rect class="p" x="912.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.37s"/>
+      <rect class="p" x="928.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.38s"/>
+      <rect class="p" x="944.0" y="160.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.40s"/>
+      <rect class="p" x="960.0" y="176.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.42s"/>
+      <rect class="p" x="960.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.39s"/>
+      <rect class="p" x="896.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.32s"/>
+      <rect class="p" x="912.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.32s"/>
+      <rect class="p" x="928.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.37s"/>
+      <rect class="p" x="944.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.35s"/>
+      <rect class="p" x="1024.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.44s"/>
+      <rect class="p" x="1040.0" y="192.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.47s"/>
+      <rect class="p" x="1024.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.45s"/>
+      <rect class="p" x="1040.0" y="208.0" width="13.4" height="13.4" rx="1.5" style="animation-delay:1.48s"/>
+    </g>
+
+    <!-- sous-titre frappe caractere par caractere -->
+    <g class="mono" filter="url(#softglow)">
+      <g clip-path="url(#typeclip)">
+        <text class="sub" x="371.8" y="272" textLength="456.3"
+              lengthAdjust="spacing" xml:space="preserve">&gt; TRADUCTION FRANCAISE INTEGRALE</text>
+      </g>
+      <rect class="caret" x="374.8" y="253" width="11.4" height="24"/>
+      <text class="meta mono" x="600.0" y="310" text-anchor="middle">ATLUS 1995 &#183; NINTENDO VIRTUAL BOY &#183; v1.0</text>
+    </g>
+
+    <!-- les trois freres -->
+    <g filter="url(#softglow)">
+      <g class="jg" style="animation-delay:3.10s"><rect x="441" y="338" width="8" height="8"/><rect x="421" y="348" width="8" height="8"/><rect x="441" y="348" width="8" height="8"/><rect x="461" y="348" width="8" height="8"/><rect x="431" y="358" width="8" height="8"/><rect x="441" y="358" width="8" height="8"/><rect x="451" y="358" width="8" height="8"/><rect x="421" y="368" width="8" height="8"/><rect x="431" y="368" width="8" height="8"/><rect x="441" y="368" width="8" height="8"/><rect x="451" y="368" width="8" height="8"/><rect x="461" y="368" width="8" height="8"/><rect x="431" y="378" width="8" height="8"/><rect x="441" y="378" width="8" height="8"/><rect x="451" y="378" width="8" height="8"/><rect x="421" y="388" width="8" height="8"/><rect x="441" y="388" width="8" height="8"/><rect x="461" y="388" width="8" height="8"/><rect x="441" y="398" width="8" height="8"/></g>
+      <g class="jg" style="animation-delay:3.40s"><rect x="585" y="338" width="8" height="8"/><rect x="605" y="338" width="8" height="8"/><rect x="585" y="348" width="8" height="8"/><rect x="595" y="348" width="8" height="8"/><rect x="605" y="348" width="8" height="8"/><rect x="575" y="358" width="8" height="8"/><rect x="585" y="358" width="8" height="8"/><rect x="595" y="358" width="8" height="8"/><rect x="605" y="358" width="8" height="8"/><rect x="615" y="358" width="8" height="8"/><rect x="575" y="368" width="8" height="8"/><rect x="595" y="368" width="8" height="8"/><rect x="615" y="368" width="8" height="8"/><rect x="575" y="378" width="8" height="8"/><rect x="585" y="378" width="8" height="8"/><rect x="595" y="378" width="8" height="8"/><rect x="605" y="378" width="8" height="8"/><rect x="615" y="378" width="8" height="8"/><rect x="585" y="388" width="8" height="8"/><rect x="595" y="388" width="8" height="8"/><rect x="605" y="388" width="8" height="8"/></g>
+      <g class="jg" style="animation-delay:3.70s"><rect x="739" y="338" width="8" height="8"/><rect x="749" y="338" width="8" height="8"/><rect x="759" y="338" width="8" height="8"/><rect x="729" y="348" width="8" height="8"/><rect x="739" y="348" width="8" height="8"/><rect x="749" y="348" width="8" height="8"/><rect x="759" y="348" width="8" height="8"/><rect x="769" y="348" width="8" height="8"/><rect x="729" y="358" width="8" height="8"/><rect x="749" y="358" width="8" height="8"/><rect x="769" y="358" width="8" height="8"/><rect x="729" y="368" width="8" height="8"/><rect x="739" y="368" width="8" height="8"/><rect x="749" y="368" width="8" height="8"/><rect x="759" y="368" width="8" height="8"/><rect x="769" y="368" width="8" height="8"/><rect x="739" y="378" width="8" height="8"/><rect x="749" y="378" width="8" height="8"/><rect x="759" y="378" width="8" height="8"/><rect x="739" y="388" width="8" height="8"/><rect x="759" y="388" width="8" height="8"/></g>
+    </g>
+    <g class="mono">
+      <text class="jl" x="446.0" y="434" text-anchor="middle" style="animation-delay:3.50s">FROST</text>
+      <text class="jl" x="600.0" y="434" text-anchor="middle" style="animation-delay:3.80s">LANTERN</text>
+      <text class="jl" x="754.0" y="434" text-anchor="middle" style="animation-delay:4.10s">SKELTON</text>
+    </g>
+  </g>
+
+  <!-- balayage CRT + scanlines, par dessus tout -->
+  <rect class="band" width="1200" height="150" fill="url(#roll)"/>
+  <rect width="1200" height="470" fill="url(#scan)"/>
+</svg>

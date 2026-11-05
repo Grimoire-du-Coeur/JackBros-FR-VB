@@ -56,6 +56,38 @@ Chaque texte est stocké à un emplacement mémoire précis avec une taille maxi
 
 <br/>
 
+### Emplacements partagés : le piège des pages
+
+**48 des 142 répliques se chevauchent volontairement.** Le jeu possède deux pointeurs vers la même zone : un vers le dialogue complet, un second vers l'une de ses pages, au beau milieu du même texte.
+
+Prenons l'astuce de la Zone Sombre :
+
+| Entrée | Offset | Taille | Contenu |
+|---|---|---|---|
+| 55 | 525900 | 121 | `Vois tu le sol cache...<PAGE>C'est la Zone Sombre...<PAGE>Des ennemis...` |
+| 56 | 525944 | 77 | `C'est la Zone Sombre...<PAGE>Des ennemis...` |
+
+L'entrée 56 n'est pas un doublon : c'est le pointeur du jeu vers la **deuxième page** de l'entrée 55, à 44 octets de son début. Les deux se terminent au même endroit.
+
+La conséquence est piégeuse. Si la page 1 française n'occupe pas exactement le même nombre d'octets que l'anglaise, la frontière de page se décale, le second pointeur tombe au milieu d'un mot, et le joueur voit un fragment en double à l'écran — alors que chaque réplique, prise isolément, tient parfaitement dans son emplacement.
+
+Une page traduite doit donc respecter **deux** contraintes : ne pas dépasser `slot_size`, et conserver la longueur exacte de la page d'origine quand une autre entrée pointe au milieu.
+
+`python tool/verifier_traduction.py` contrôle les deux et indique, le cas échéant, de combien d'octets rallonger la page fautive.
+
+<br/>
+
+### Outils de contrôle
+
+| Commande | Rôle |
+|---|---|
+| `python tool/verifier_traduction.py` | Valide la traduction : encodage, tailles, zones partagées |
+| `python tool/test_core_engine.py` | Teste le moteur : tables, aller-retour, refus des cas invalides |
+
+Aucune ROM ni dépendance externe n'est nécessaire pour les exécuter.
+
+<br/>
+
 ---
 
 ## 3. Remarque sur les graphismes du HUD

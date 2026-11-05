@@ -1,0 +1,54 @@
+Licence de la traduction
+========================
+
+Ce dépôt est sous double licence. Le présent fichier couvre UNIQUEMENT
+l'œuvre de traduction. Le code est couvert par le fichier LICENSE
+(GNU General Public License v3.0).
+
+
+Ce qui est couvert par cette licence
+------------------------------------
+
+  - traduction/JackBros_FR.json  (les 142 textes français du jeu)
+  - les textes rédigés pour ce dépôt : README.md, DOCUMENTATION.md,
+    CREDITS.md
+  - les captures d'écran du jeu traduit, dans assets/screenshots/
+
+Ce qui n'est PAS couvert
+------------------------
+
+  - tout le code : tool/, patcher/, start.bat, les scripts     -> LICENSE (GPL-3.0)
+  - xdelta3 compilé en WebAssembly, dans patcher/              -> licence propre à xdelta3
+  - les textes anglais d'origine, les graphismes, la musique,
+    les personnages et la publicité reproduite dans assets/    -> Atlus Co., Ltd. / SEGA
+
+Aucune ROM, ni aucune donnée protégée extraite de la cartouche d'origine,
+n'est distribuée dans ce dépôt.
+
+
+Licence applicable
+------------------
+
+Creative Commons Attribution - Pas d'Utilisation Commerciale -
+Partage dans les Mêmes Conditions 4.0 International
+(CC BY-NC-SA 4.0)
+
+Résumé lisible : https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr
+Texte intégral  : https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.fr
+
+En résumé, vous êtes libre de partager et d'adapter cette traduction,
+aux conditions suivantes :
+
+  Attribution   - créditer chenetulipe et ce dépôt, indiquer si des
+                  modifications ont été apportées.
+  Pas d'usage   - interdiction d'en faire un usage commercial, ce qui
+  commercial      inclut la vente de cartouches reproduites contenant
+                  cette traduction.
+  Partage dans  - toute adaptation doit être diffusée sous la même
+  les mêmes       licence.
+  conditions
+
+Aucune garantie n'est fournie. La licence ne donne pas nécessairement
+tous les droits requis pour l'utilisation prévue : d'autres droits,
+notamment ceux d'Atlus / SEGA sur l'œuvre d'origine, peuvent restreindre
+votre usage.
