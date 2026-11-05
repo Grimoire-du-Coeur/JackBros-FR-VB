@@ -437,7 +437,7 @@
         "slot_size": 121,
         "font": 1,
         "texte_orig": " See how the floor's hidden in some places?\nThat's Dark Zone. You'd better be careful!\nEnemies might be hiding in there!<END>",
-        "texte_fr": " Vois tu le\nsol cache par\nendroits ?<PAGE>C'est la Zone\nSombre. Sois\nprudent !<PAGE>Des ennemis\npeuvent s'y\ncacher !<END>"
+        "texte_fr": " Vois tu le\nsol cache par\nendroits ?       <PAGE>C'est la Zone\nSombre. Sois\nprudent !<PAGE>Des ennemis\npeuvent s'y\ncacher !<END>"
     },
     {
         "id": 56,
@@ -661,7 +661,7 @@
         "slot_size": 200,
         "font": 1,
         "texte_orig": " Pixie: Finally, this is the last floor!\nPixie: Your last opponent is Belzoff,\nPixie: ruler of the Monster World.\nPixie: He's a lot stronger than those other guys\nPixie: Give it your best shot, Jack!<END>",
-        "texte_fr": " Pixie: Enfin,\nvoici le tout\ndernier etage!<PAGE>Pixie: Ton rival\nest Belzoff,\nroi du Monde des\nMonstres.<PAGE>Pixie: Il est\nbien plus fort\nque les autres!<PAGE>Pixie: Donne\ntout ce que tu\nas, Jack!<END>"
+        "texte_fr": " Pixie: Enfin,\nvoici le tout\ndernier etage!<PAGE>Pixie: Ton rival\nest Belzoff,\nroi du Monde des\nMonstres.<PAGE>Pixie: Il est\nbien plus fort\nque les autres!                        <PAGE>Fais de ton\nmieux, Jack!<END>"
     },
     {
         "id": 84,
